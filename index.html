@@ -3,118 +3,692 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shahrokh's Projects</title>
+    <title>shahrokh-Dev | Modern Development Studio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #0d1117;
-            color: #c9d1d9;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        header {
+        
+        /* Fixed Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-link:hover {
+            color: #667eea;
+        }
+        
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #cccccc;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        .dropdown-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .dropdown-item.disabled:hover {
+            background: none;
+            color: #cccccc;
+        }
+        
+        .coming-soon {
+            font-size: 0.7rem;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 2rem;
-            background: #161b22;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.1) 0%, rgba(10, 10, 10, 1) 70%);
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2;
         }
-        header p {
-            color: #8b949e;
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #667eea 50%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
         }
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 40px;
+            font-weight: 400;
         }
-        .card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 10px;
-            padding: 1rem;
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: scale(1.05);
-        }
-        .card h3 {
-            margin-top: 0;
-        }
-        .btn {
+        
+        .cta-button {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            margin-top: 0.5rem;
-            background: #238636;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
-        .btn:hover {
-            background: #2ea043;
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .shape-3 {
+            width: 80px;
+            height: 80px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 100px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #ffffff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .card:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .disabled-card {
+            opacity: 0.6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .disabled-card:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: none;
+        }
+        
+        .disabled-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .support-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(102, 126, 234, 0.3), transparent);
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+        }
+        
+        .support-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+        }
+        
+        .support-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .support-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .support-button:hover::before {
+            left: 100%;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(10deg);
+            animation: bounce 0.6s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: scale(1.2) translateY(0) rotate(10deg);
+            }
+            40% {
+                transform: scale(1.2) translateY(-10px) rotate(10deg);
+            }
+            60% {
+                transform: scale(1.2) translateY(-5px) rotate(10deg);
+            }
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .card-description {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .section {
+                padding: 60px 15px;
+            }
+        }
+        
+        /* Scroll Effects */
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
+    <!-- Fixed Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="logo">shahrokh-Dev</div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#products" class="nav-link">
+                        Products
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#apps" class="dropdown-item">Mobile Apps</a>
+                        <a href="#windows" class="dropdown-item">Windows Apps</a>
+                        <a href="#games" class="dropdown-item disabled">Games <span class="coming-soon">Coming Soon</span></a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#help" class="nav-link">Help</a>
+                </li>
+            </ul>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
 
-<header>
-    <h1>Shahrokh's Python Projects</h1>
-    <p>Showcasing my favorite coding creations 🐍</p>
-</header>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="bg-animation">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Modern Development Studio</h1>
+            <p class="hero-subtitle">Creating innovative apps and games with cutting-edge technology and stunning design</p>
+            <a href="#products" class="cta-button">Explore Our Work</a>
+        </div>
+    </section>
 
-<section class="projects">
-    <div class="card">
-        <h3>Health Assistance</h3>
-        <p>A health tracking app built with Python and PySide6.</p>
-        <a href="#" class="btn">View on GitHub</a>
-    </div>
-    <div class="card">
-        <h3>GroWay</h3>
-        <p>A productivity app with 800+ lines of Python code.</p>
-        <a href="#" class="btn">View on GitHub</a>
-    </div>
-    <div class="card">
-        <h3>Update Manager</h3>
-        <p>Python GUI updater that downloads and installs files.</p>
-        <a href="#" class="btn">View on GitHub</a>
-    </div>
-</section>
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <h2 class="section-title">Our Products</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon">📱</span>
+                <h3 class="card-title">Mobile Apps</h3>
+                <p class="card-description">Innovative mobile applications built with the latest technologies for iOS and Android platforms.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🖥️</span>
+                <h3 class="card-title">Windows Apps</h3>
+                <p class="card-description">Powerful desktop applications for Windows with native performance and modern UI design.</p>
+            </div>
+            <div class="card disabled-card">
+                <span class="card-icon">🎮</span>
+                <h3 class="card-title">Games <span class="coming-soon">Coming Soon</span></h3>
+                <p class="card-description">Engaging and immersive games that captivate players with stunning visuals and smooth gameplay.</p>
+            </div>
+            <div class="card disabled-card">
+                <span class="card-icon">💻</span>
+                <h3 class="card-title">Web Solutions <span class="coming-soon">Coming Soon</span></h3>
+                <p class="card-description">Modern web applications and websites designed for performance, scalability, and user experience.</p>
+            </div>
+        </div>
+    </section>
 
-</body>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About shahrokh-Dev</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon">🚀</span>
+                <h3 class="card-title">Innovation First</h3>
+                <p class="card-description">We push the boundaries of technology to create solutions that are ahead of their time.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🎨</span>
+                <h3 class="card-title">Design Excellence</h3>
+                <p class="card-description">Every pixel matters. We craft beautiful, intuitive interfaces that users love to interact with.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">⚡</span>
+                <h3 class="card-title">Performance</h3>
+                <p class="card-description">Lightning-fast applications optimized for the best user experience across all devices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help & Support Section -->
+    <section class="section" id="help">
+        <h2 class="section-title">Support Our Mission</h2>
+        <div class="cards-grid">
+            <div class="card support-card">
+                <span class="card-icon">💝</span>
+                <h3 class="card-title">Become a Sponsor</h3>
+                <p class="card-description">Help us create amazing apps and games by becoming a sponsor. Your support drives innovation.</p>
+                <div class="support-button">Sponsor Now</div>
+            </div>
+            <div class="card support-card">
+                <span class="card-icon">☕</span>
+                <h3 class="card-title">Buy Me a Coffee</h3>
+                <p class="card-description">Support our development with a small donation. Every coffee helps fuel late-night coding sessions!</p>
+                <div class="support-button">Donate</div>
+            </div>
+            <div class="card">
+                <span class="card-icon">📧</span>
+                <h3 class="card-title">Technical Support</h3>
+                <p class="card-description">Get in touch with our support team for any questions or technical assistance with our products.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">📚</span>
+                <h3 class="card-title">Documentation</h3>
+                <p class="card-description">Comprehensive guides and documentation to help you get the most out of our applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.floating-shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.5 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Mobile menu functionality (basic implementation)
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            // This would typically toggle a mobile menu
+            alert('Mobile menu would open here');
+        });
+
+        // Support button functionality
+        document.querySelectorAll('.support-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const cardTitle = this.parentElement.querySelector('.card-title').textContent;
+                if (cardTitle.includes('Sponsor')) {
+                    alert('Thank you for your interest in sponsoring! This would redirect to our sponsorship page.');
+                } else if (cardTitle.includes('Coffee')) {
+                    alert('Thank you for supporting us! This would redirect to our donation page.');
+                }
+            });
+        });
+
+        // Add staggered animation to cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide cards for animation
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f856b9932f0f8c',t:'MTc1NTI1NzIwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-<div class="animation-wrapper">
-  <div class="sphere-animation">
-    <svg class="sphere" viewBox="0 0 440 440" stroke="rgba(80,80,80,.35)">
-      <defs>
-        <linearGradient id="sphereGradient" x1="5%" x2="5%" y1="0%" y2="15%">
-          <stop stop-color="#373734" offset="0%"/>
-          <stop stop-color="#242423" offset="50%"/>
-          <stop stop-color="#0D0D0C" offset="100%"/>
-        </linearGradient>
-      </defs>
-      <path d="M361.604 361.238c-24.407 24.408-51.119 37.27-59.662 28.727-8.542-8.543 4.319-35.255 28.726-59.663 24.408-24.407 51.12-37.269 59.663-28.726 8.542 8.543-4.319 35.255-28.727 59.662z"/>
-      <path d="M360.72 360.354c-35.879 35.88-75.254 54.677-87.946 41.985-12.692-12.692 6.105-52.067 41.985-87.947 35.879-35.879 75.254-54.676 87.946-41.984 12.692 12.692-6.105 52.067-41.984 87.946z"/>
-      <path d="M357.185 356.819c-44.91 44.91-94.376 68.258-110.485 52.149-16.11-16.11 7.238-65.575 52.149-110.485 44.91-44.91 94.376-68.259 110.485-52.15 16.11 16.11-7.239 65.576-52.149 110.486z"/>
-      <path d="M350.998 350.632c-53.21 53.209-111.579 81.107-130.373 62.313-18.794-18.793 9.105-77.163 62.314-130.372 53.209-53.21 111.579-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z"/>
-      <path d="M343.043 342.677c-59.8 59.799-125.292 91.26-146.283 70.268-20.99-20.99 10.47-86.483 70.269-146.282 59.799-59.8 125.292-91.26 146.283-70.269 20.99 20.99-10.47 86.484-70.27 146.283z"/>
-      <path d="M334.646 334.28c-65.169 65.169-136.697 99.3-159.762 76.235-23.065-23.066 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z"/>
-      <path d="M324.923 324.557c-69.806 69.806-146.38 106.411-171.031 81.76-24.652-24.652 11.953-101.226 81.759-171.032 69.806-69.806 146.38-106.411 171.031-81.76 24.652 24.653-11.953 101.226-81.759 171.032z"/>
-      <path d="M312.99 312.625c-73.222 73.223-153.555 111.609-179.428 85.736-25.872-25.872 12.514-106.205 85.737-179.428s153.556-111.609 179.429-85.737c25.872 25.873-12.514 106.205-85.737 179.429z"/>
-      <path d="M300.175 299.808c-75.909 75.909-159.11 115.778-185.837 89.052-26.726-26.727 13.143-109.929 89.051-185.837 75.908-75.908 159.11-115.778 185.837-89.051 26.726 26.726-13.143 109.928-89.051 185.836z"/>
-      <path d="M284.707 284.34c-77.617 77.617-162.303 118.773-189.152 91.924-26.848-26.848 14.308-111.534 91.924-189.15C265.096 109.496 349.782 68.34 376.63 95.188c26.849 26.849-14.307 111.535-91.923 189.151z"/>
-      <path d="M269.239 267.989c-78.105 78.104-163.187 119.656-190.035 92.807-26.849-26.848 14.703-111.93 92.807-190.035 78.105-78.104 163.187-119.656 190.035-92.807 26.849 26.848-14.703 111.93-92.807 190.035z"/>
-      <path d="M252.887 252.52C175.27 330.138 90.584 371.294 63.736 344.446 36.887 317.596 78.043 232.91 155.66 155.293 233.276 77.677 317.962 36.521 344.81 63.37c26.85 26.848-14.307 111.534-91.923 189.15z"/>
-      <path d="M236.977 236.61C161.069 312.52 77.867 352.389 51.14 325.663c-26.726-26.727 13.143-109.928 89.052-185.837 75.908-75.908 159.11-115.777 185.836-89.05 26.727 26.726-13.143 109.928-89.051 185.836z"/>
-      <path d="M221.067 220.7C147.844 293.925 67.51 332.31 41.639 306.439c-25.873-25.873 12.513-106.206 85.736-179.429C200.6 53.786 280.931 15.4 306.804 41.272c25.872 25.873-12.514 106.206-85.737 179.429z"/>
-      <path d="M205.157 204.79c-69.806 69.807-146.38 106.412-171.031 81.76-24.652-24.652 11.953-101.225 81.759-171.031 69.806-69.807 146.38-106.411 171.031-81.76 24.652 24.652-11.953 101.226-81.759 171.032z"/>
-      <path d="M189.247 188.881c-65.169 65.169-136.696 99.3-159.762 76.235-23.065-23.065 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z"/>
-      <path d="M173.337 172.971c-59.799 59.8-125.292 91.26-146.282 70.269-20.991-20.99 10.47-86.484 70.268-146.283 59.8-59.799 125.292-91.26 146.283-70.269 20.99 20.991-10.47 86.484-70.269 146.283z"/>
-      <path d="M157.427 157.061c-53.209 53.21-111.578 81.108-130.372 62.314-18.794-18.794 9.104-77.164 62.313-130.373 53.21-53.209 111.58-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z"/>
-      <path d="M141.517 141.151c-44.91 44.91-94.376 68.259-110.485 52.15-16.11-16.11 7.239-65.576 52.15-110.486 44.91-44.91 94.375-68.258 110.485-52.15 16.109 16.11-7.24 65.576-52.15 110.486z"/>
-      <path d="M125.608 125.241c-35.88 35.88-75.255 54.677-87.947 41.985-12.692-12.692 6.105-52.067 41.985-87.947C115.525 43.4 154.9 24.603 167.592 37.295c12.692 12.692-6.105 52.067-41.984 87.946z"/>
-      <path d="M109.698 109.332c-24.408 24.407-51.12 37.268-59.663 28.726-8.542-8.543 4.319-35.255 28.727-59.662 24.407-24.408 51.12-37.27 59.662-28.727 8.543 8.543-4.319 35.255-28.726 59.663z"/>
-    </svg>
-  </div>
-</div>
-
