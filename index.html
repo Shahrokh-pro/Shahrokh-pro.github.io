@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahrokh's Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #0d1117;
+            color: #c9d1d9;
+        }
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: #161b22;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            color: #8b949e;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 1rem;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            background: #238636;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #2ea043;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Shahrokh's Python Projects</h1>
+    <p>Showcasing my favorite coding creations 🐍</p>
+</header>
+
+<section class="projects">
+    <div class="card">
+        <h3>Health Assistance</h3>
+        <p>A health tracking app built with Python and PySide6.</p>
+        <a href="#" class="btn">View on GitHub</a>
+    </div>
+    <div class="card">
+        <h3>GroWay</h3>
+        <p>A productivity app with 800+ lines of Python code.</p>
+        <a href="#" class="btn">View on GitHub</a>
+    </div>
+    <div class="card">
+        <h3>Update Manager</h3>
+        <p>Python GUI updater that downloads and installs files.</p>
+        <a href="#" class="btn">View on GitHub</a>
+    </div>
+</section>
+
+</body>
+</html>
